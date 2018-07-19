@@ -4,7 +4,7 @@ set -o nounset
 set -o pipefail
 set -o errtrace
 
-CRIPROXY_DEB_URL="${CRIPROXY_DEB_URL:-https://github.com/Mirantis/criproxy/releases/download/v0.11.1/criproxy-nodeps_0.11.1_amd64.deb}"
+CRIPROXY_DEB_URL="${CRIPROXY_DEB_URL:-https://434-109821784-gh.circle-artifacts.com/0/criproxy/criproxy-nodeps_0.11.1-2_amd64.deb}"
 VIRTLET_IMAGE="${VIRTLET_IMAGE:-mirantis/virtlet}"
 VIRTLET_SKIP_RSYNC="${VIRTLET_SKIP_RSYNC:-}"
 VIRTLET_RSYNC_PORT="${VIRTLET_RSYNC_PORT:-18730}"
@@ -328,7 +328,7 @@ function start_virtlet {
         opts+=(--compat)
     fi
     docker exec virtlet-build "${remote_project_dir}/_output/virtletctl" gen "${opts[@]}" |
-        kubectl apply -f -
+        kubectl apply --validate=false -f -
 }
 
 function virtlet_subdir {
